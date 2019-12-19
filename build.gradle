@@ -1,0 +1,37 @@
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building an application
+    id 'application'
+    
+    id 'eclipse'
+}
+
+ext.jxBrowserVersion = '7.4'
+ext.swtVersion = '3.111.0'
+
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+	maven {
+		url 'http://maven.teamdev.com/repository/products'
+	}
+}
+
+dependencies {
+	compile 'com.teamdev.jxbrowser:jxbrowser:' + jxBrowserVersion
+	compile 'com.teamdev.jxbrowser:jxbrowser-swing:' + jxBrowserVersion
+	compile 'com.teamdev.jxbrowser:jxbrowser-mac:' + jxBrowserVersion
+	compile 'org.eclipse.platform:org.eclipse.swt.cocoa.macosx.x86_64:' + swtVersion, { exclude module: 'org.eclipse.swt'}
+}
+
+// Define the main class for the application
+mainClassName = 'SwtJxBrowserOSX.App'
+applicationDefaultJvmArgs = [
+	'-XstartOnFirstThread',
+	'-Djxbrowser.ipc.external=true',
+	'--add-opens=java.base/java.nio=ALL-UNNAMED',
+	'--add-opens=java.base/java.lang=ALL-UNNAMED'
+]
