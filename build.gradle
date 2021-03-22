@@ -8,15 +8,15 @@ plugins {
     id 'eclipse'
 }
 
-ext.jxBrowserVersion = '7.4'
-ext.swtVersion = '3.111.0'
+ext.jxBrowserVersion = '7.13'
+ext.swtVersion = '3.116.0'
 
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 	maven {
-		url 'http://maven.teamdev.com/repository/products'
+		url 'https://europe-maven.pkg.dev/jxbrowser/releases'
 	}
 	flatDir {
 		dirs 'lib'
@@ -24,20 +24,15 @@ repositories {
 }
 
 dependencies {
-	/*compile 'com.teamdev.jxbrowser:jxbrowser:' + jxBrowserVersion
-	compile 'com.teamdev.jxbrowser:jxbrowser-swing:' + jxBrowserVersion
-	compile 'com.teamdev.jxbrowser:jxbrowser-mac:' + jxBrowserVersion*/
-	compile name: 'jxbrowser-7.6-b4-eap'
-	compile name: 'jxbrowser-mac-7.6-b4-eap'
-	compile name: 'jxbrowser-swt-7.6-b4-eap'
-	compile 'org.eclipse.platform:org.eclipse.swt.cocoa.macosx.x86_64:' + swtVersion, { exclude module: 'org.eclipse.swt'}
+	compile 'com.teamdev.jxbrowser:jxbrowser:' + jxBrowserVersion
+	compile 'com.teamdev.jxbrowser:jxbrowser-swt:' + jxBrowserVersion
+	compile 'com.teamdev.jxbrowser:jxbrowser-linux64:' + jxBrowserVersion
+	compile 'org.eclipse.platform:org.eclipse.swt.gtk.linux.x86_64:' + swtVersion, { exclude module: 'org.eclipse.swt'}
 }
 
 // Define the main class for the application
 mainClassName = 'SwtJxBrowserOSX.App'
 applicationDefaultJvmArgs = [
-	'-XstartOnFirstThread',
-	'-Djxbrowser.ipc.external=true',
 	'--add-opens=java.base/java.nio=ALL-UNNAMED',
 	'--add-opens=java.base/java.lang=ALL-UNNAMED'
 ]

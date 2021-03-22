@@ -14,7 +14,7 @@ import com.teamdev.jxbrowser.view.swt.BrowserView;
 
 public class App {
     public static void main(String[] arguments) {
-    	boolean renderHW = true;
+    	boolean renderHW = !"true".equals(System.getProperty("offscreen"));
     	String jxlicense = System.getProperty("jxlicense");
     	
     	Builder builder = EngineOptions.newBuilder(renderHW ? RenderingMode.HARDWARE_ACCELERATED : RenderingMode.OFF_SCREEN);
@@ -30,7 +30,7 @@ public class App {
         composite.setLayout(new FillLayout());
         BrowserView browserView = BrowserView.newInstance(composite, browserContext.newBrowser());
          
-        browserView.getBrowser().navigation().loadUrl("http://google.com");
+        browserView.getBrowser().navigation().loadUrl("https://google.com");
          
         shell.open();
          
